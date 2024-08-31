@@ -50,9 +50,11 @@
   <script setup>
   import { ref } from 'vue'
   import router from '../router/index';
+  import { useAuthticate } from '../router/authenticate';
  
   const hardCodeUserName = 'user'
   const hardCodePassword = '12345678'
+  const { isAuthenticated } = useAuthticate()
 
   
   const formData = ref({
@@ -67,6 +69,8 @@
     validatePassword(true)
     if (!errors.value.username && !errors.value.password && formData.value.username ===  hardCodeUserName && formData.value.password === hardCodePassword) {
     alert("login success")
+    isAuthenticated.value = true
+    console.log("loginview",isAuthenticated.value)
     router.push({name:'About'})
     }
   }

@@ -15,10 +15,23 @@
         <li class="nav-item">
           <router-link to="/login" class="nav-link" active-class="active">Login</router-link>
         </li>
+        <li class="nav-item">
+          <button to="/nav-link" class="nav-link" active-class="active" @click="logout">Logout</button>
+        </li>
       </ul>
     </header>
   </div>
 </template>
+<script setup>
+import { useAuthticate } from '../router/authenticate';
+import router from '../router/index';
+const { isAuthenticated } = useAuthticate()
+const logout = () => {
+  isAuthenticated.value = false
+  alert("logout success")
+  router.push({name:'Home'})
+}
+</script>
 <style scoped>
 .b-example-divider {
   height: 3rem;

@@ -2,6 +2,8 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import AboutView from '../views/AboutView.vue'
 import LoginView from '@/views/LoginView.vue'
+import { useAuthticate } from './authenticate';
+const { isAuthenticated } = useAuthticate()
 const routes = [
   {
     path: '/',
@@ -28,11 +30,16 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
   // Perform logic before every route change
   if (to.name == 'About') {
-    // For example, redirect to home if trying to access any other route
-    alert("Please login!")
-    next({ name: 'Login' });
-  } else {
-    next();
+     if (isAuthenticated.value == true){
+      next()
+     }
+     else
+     {
+      next({name:'Login'})
+     } 
+  }
+  else{
+    next()
   }
 });
 
