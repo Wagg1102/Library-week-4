@@ -6,7 +6,7 @@
           <h1 class="text-center">🗄️ W5. Library Please login</h1>
 
           <form @submit.prevent="submitForm">
-            <div class="row mb-3">
+            <div class="row mb-3 offset-md-4">
               <div class="col-md-6 col-sm-6">
                 <label for="username" class="form-label">Username</label>
                 <input
@@ -22,7 +22,7 @@
            
   
             </div>
-            <div class="row mb-3">
+            <div class="row mb-3 offset-md-4">
               <div class="col-md-6 col-sm-6">
                 <label for="password" class="form-label">Password</label>
                 <input
@@ -49,9 +49,10 @@
   </template>
   <script setup>
   import { ref } from 'vue'
+  import router from '../router/index';
  
   const hardCodeUserName = 'user'
-  const hardCodePassword = '123456'
+  const hardCodePassword = '12345678'
 
   
   const formData = ref({
@@ -64,8 +65,9 @@
   const submitForm = () => {
     validateName(true)
     validatePassword(true)
-    if (!errors.value.password && formData.value.username ===  hardCodeUserName && formData.value.password === hardCodePassword) {
+    if (!errors.value.username && !errors.value.password && formData.value.username ===  hardCodeUserName && formData.value.password === hardCodePassword) {
     alert("login success")
+    router.push({name:'About'})
     }
   }
   

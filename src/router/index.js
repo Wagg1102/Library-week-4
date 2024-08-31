@@ -25,4 +25,15 @@ const router = createRouter({
   routes
 })
 
+router.beforeEach((to, from, next) => {
+  // Perform logic before every route change
+  if (to.name == 'About') {
+    // For example, redirect to home if trying to access any other route
+    alert("Please login!")
+    next({ name: 'Login' });
+  } else {
+    next();
+  }
+});
+
 export default router
