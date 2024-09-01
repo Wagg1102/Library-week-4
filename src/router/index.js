@@ -5,7 +5,7 @@ import LoginView from '../views/LoginView.vue'
 import RegisterView from '../views/RegisterView.vue'
 import AdminLoginView from '../views/AdminLoginView.vue'
 import ProfileView from '../views/ProfileView.vue'
-import RatingView from '../views/RatingView.vue' 
+import RatingView from '../views/RatingView.vue'
 
 const routes = [
   {
@@ -21,7 +21,8 @@ const routes = [
   {
     path: '/about',
     name: 'About',
-    component: AboutView
+    component: AboutView,
+    meta: { requiresAuth: true }  
   },
   {
     path: '/admin-login',
@@ -36,12 +37,14 @@ const routes = [
   {
     path: '/profile',
     name: 'Profile',
-    component: ProfileView
+    component: ProfileView,
+    
   },
   {
-    path: '/rating',  
+    path: '/rating',
     name: 'Rating',
-    component: RatingView
+    component: RatingView,
+    meta: { requiresAuth: true } 
   }
 ]
 
@@ -50,21 +53,18 @@ const router = createRouter({
   routes
 })
 
-// router.beforeEach((to, from, next) => {
-//   // Perform logic before every route change
-//   const { isAuthenticated } = useAuthticate()
-//   if (to.name == 'About') {
-//      if (isAuthenticated.value == true){
-//       next()
-//      }
-//      else
-//      {
-//       next({name:'Login'})
-//      } 
-//   }
-//   else{
-//     next()
-//   }
-// });
+router.beforeEach((to, from, next) => {
+  const isAuthenticated = localStorage.getItem('isAuthenticated') === 'true'
+  
+  if (to.matched.some(record => record.meta.requiresAuth)) {
+    if (isAuthenticated) {
+      next()
+    } else {
+      next({ name: 'Login' })  
+    }
+  } else {
+    next()
+  }
+})
 
 export default router
