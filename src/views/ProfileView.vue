@@ -17,19 +17,9 @@
 import { ref } from 'vue'
 
 const isAuthenticated = ref(localStorage.getItem('isAuthenticated') === 'true');
+
+// Watch for changes in localStorage to update the component when logging out
+window.addEventListener('storage', () => {
+  isAuthenticated.value = localStorage.getItem('isAuthenticated') === 'true';
+});
 </script>
-
-<style scoped>
-.container {
-  max-width: 600px;
-}
-
-.card, .alert {
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  border-radius: 5px;
-}
-
-h2 {
-  font-weight: bold;
-}
-</style>

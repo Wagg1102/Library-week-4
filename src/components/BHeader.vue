@@ -34,10 +34,12 @@ import { useAuthticate } from '../router/authenticate';
 import router from '../router/index';
 const { isAuthenticated } = useAuthticate()
 const logout = () => {
-  isAuthenticated.value = false
-  alert("logout success")
-  router.push({name:'Home'})
+  isAuthenticated.value = false;
+  localStorage.removeItem('isAuthenticated');
+  alert("Logout successful");
+  router.push({ name: 'Home' });
 }
+
 </script>
 <style scoped>
 .b-example-divider {
