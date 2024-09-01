@@ -1,9 +1,8 @@
 <template>
-  <!-- 🗄️ W3. Library Registration Form -->
   <div class="container mt-5">
     <div class="row">
       <div class="col-md-8 offset-md-2">
-        <h1 class="text-center">🗄️ W5. Library Please login</h1>
+        <h1 class="text-center">User Login</h1>
 
         <form @submit.prevent="submitForm">
           <div class="row mb-3 offset-md-4">
@@ -98,6 +97,4 @@ const validatePassword = (blur) => {
     errors.value.password = null
   }
 }
-
-
 </script>

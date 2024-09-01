@@ -1,27 +1,34 @@
 <template>
-  <!-- Using Bootstrap's Header template (starter code) -->
-  <!-- https://getbootstrap.com/docs/5.0/examples/headers/ -->
   <div class="container">
-    <header class="d-flex justify-content-center py-3">
-      <ul class="nav nav-pills">
-        <li class="nav-item">
-          <router-link to="/" class="nav-link" active-class="active" aria-current="page"
-            >Home (Week 5)</router-link
-          >
-        </li>
-        <li class="nav-item">
-          <router-link to="/about" class="nav-link" active-class="active">About</router-link>
-        </li>
-        <li class="nav-item">
-          <router-link to="/login" class="nav-link" active-class="active">Login</router-link>
-        </li>
-        <li class="nav-item">
-          <button to="/nav-link" class="nav-link" active-class="active" @click="logout">Logout</button>
-        </li>
-      </ul>
+    <header class="d-flex justify-content-between py-3">
+      <div>
+        <router-link to="/profile" class="nav-link d-inline-block" active-class="active">Profile</router-link>
+      </div>
+      <div class="d-flex justify-content-center w-100">
+        <ul class="nav nav-pills">
+          <li class="nav-item">
+            <router-link to="/" class="nav-link" active-class="active" aria-current="page">Home</router-link>
+          </li>
+          <li class="nav-item">
+            <router-link to="/register" class="nav-link" active-class="active">Register</router-link>
+          </li>
+          <li class="nav-item">
+            <router-link to="/about" class="nav-link" active-class="active">About</router-link>
+          </li>
+          <li class="nav-item">
+            <router-link to="/rating" class="nav-link" active-class="active">Rating</router-link>
+          </li>
+          <li class="nav-item">
+            <router-link v-if="!isAuthenticated" to="/login" class="nav-link d-inline-block" active-class="active">Login</router-link>
+            <router-link v-if="!isAuthenticated" to="/admin-login" class="nav-link d-inline-block" active-class="active">Admin Login</router-link>
+            <button v-if="isAuthenticated" class="nav-link btn" @click="logout">Logout</button>
+          </li>
+        </ul>
+      </div>
     </header>
   </div>
 </template>
+
 <script setup>
 import { useAuthticate } from '../router/authenticate';
 import router from '../router/index';
