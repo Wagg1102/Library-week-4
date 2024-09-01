@@ -60,6 +60,7 @@ router.beforeEach((to, from, next) => {
     if (isAuthenticated) {
       next()
     } else {
+      alert('Please log in to access this page.');
       next({ name: 'Login' })  
     }
   } else {
