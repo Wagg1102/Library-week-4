@@ -1,3 +1,4 @@
+
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import AboutView from '../views/AboutView.vue'
@@ -6,6 +7,11 @@ import RegisterView from '../views/RegisterView.vue'
 import AdminLoginView from '../views/AdminLoginView.vue'
 import ProfileView from '../views/ProfileView.vue'
 import RatingView from '../views/RatingView.vue'
+import FirebaseSigninView from '@/views/FirebaseSigninView.vue'
+import FirebaseRegisterView from '@/views/FirebaseRegisterView.vue'
+import AddBookView from '@/views/AddBookView.vue'
+import BookListView from '@/views/BookListView.vue'
+import EditBookView from '@/views/EditBookView.vue'
 
 const routes = [
   {
@@ -14,20 +20,26 @@ const routes = [
     component: HomeView
   },
   {
-    path: '/register',
-    name: 'Register',
-    component: RegisterView
+    path: '/bookList',
+    name: 'BookList',
+    component: BookListView,
+  },
+  {
+    path: '/edit/:id',  
+    name: 'EditBook',
+    component: EditBookView,
+    props: true  
+  },
+  {
+    path: '/addBook',
+    name: 'addBook',
+    component: AddBookView,
   },
   {
     path: '/about',
     name: 'About',
     component: AboutView,
-    meta: { requiresAuth: true }  
-  },
-  {
-    path: '/admin-login',
-    name: 'AdminLogin',
-    component: AdminLoginView
+    meta: { requiresAuth: true }
   },
   {
     path: '/login',
@@ -35,16 +47,36 @@ const routes = [
     component: LoginView
   },
   {
+    path: '/register',
+    name: 'Register',
+    component: RegisterView
+  },
+  {
+    path: '/admin-login',
+    name: 'AdminLogin',
+    component: AdminLoginView
+  },
+  {
     path: '/profile',
     name: 'Profile',
     component: ProfileView,
-    
+    meta: { requiresAuth: true }
   },
   {
     path: '/rating',
     name: 'Rating',
     component: RatingView,
-    meta: { requiresAuth: true } 
+    meta: { requiresAuth: true }
+  },
+  {
+    path: '/FireLogin',
+    name: 'FireLogin',
+    component: FirebaseSigninView
+  },
+  {
+    path: '/FireRegister',
+    name: 'FireRegister',
+    component: FirebaseRegisterView
   }
 ]
 
@@ -54,18 +86,18 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  const isAuthenticated = localStorage.getItem('isAuthenticated') === 'true'
+  const isAuthenticated = localStorage.getItem('isAuthenticated') === 'true';
   
   if (to.matched.some(record => record.meta.requiresAuth)) {
     if (isAuthenticated) {
-      next()
+      next();
     } else {
       alert('Please log in to access this page.');
-      next({ name: 'Login' })  
+      next({ name: 'Login' });
     }
   } else {
-    next()
+    next();
   }
-})
+});
 
-export default router
+export default router;

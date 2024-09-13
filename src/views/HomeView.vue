@@ -1,4 +1,7 @@
 <script setup>
+ import { getAuth } from "firebase/auth";
+ console.log("home auth",getAuth())
+ console.log("home auth current user",getAuth().currentUser)
 </script>
 
 <template>
@@ -20,7 +23,7 @@
   max-width: 80vw;
   margin: 0 auto;
   padding: 20px;
-  border-radius: 10px;
+  border-radius: 10px
 }
 
 h1 {
