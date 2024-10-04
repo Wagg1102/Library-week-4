@@ -16,6 +16,15 @@
             <router-link to="/bookList" class="nav-link" active-class="active">Book List</router-link>
           </li>
           <li class="nav-item">
+            <router-link to="/GetBookCount" class="nav-link" active-class="active">Get Book Count</router-link>
+          </li>
+          <li class="nav-item">
+            <router-link to="/CountBookAPI" class="nav-link" active-class="active">Count Book API</router-link>
+          </li>
+          <li class="nav-item">
+            <router-link to="/GetAllBookAPI" class="nav-link" active-class="active">Get All Book API</router-link>
+          </li>
+          <li class="nav-item">
             <router-link to="/addBook" class="nav-link" active-class="active">Add Book</router-link>
           </li>
           <li class="nav-item">
@@ -26,6 +35,9 @@
           </li>
           <li class="nav-item">
             <router-link to="/rating" class="nav-link" active-class="active">Rating</router-link>
+          </li>
+          <li class="nav-item">
+            <router-link to="/WeatherView" class="nav-link" active-class="active">Weather View</router-link>
           </li>
           <li class="nav-item">
             <router-link v-if="!isAuthenticated" to="/login" class="nav-link d-inline-block" active-class="active">Login</router-link>
